@@ -1,32 +1,73 @@
-import { Injectable } from '@nestjs/common';
-import { User } from '../../../../../libs/types/src';
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { User } from '@happy-coding-challenge/types';
+import { InjectRepository } from '@nestjs/typeorm';
+import { DeleteResult, Repository } from 'typeorm';
+import { UserEntity } from './user.entity';
 
 @Injectable()
 export class UserService {
-  private users: User[] = [
-    {
-      id: '1',
-      dateOfBirth: new Date('1989-09-25T07:38:55.652Z'),
-      firstname: 'Konrad',
-      lastname: 'Weiss',
-      hash: '$argon2id$v=19$m=65536,t=3,p=4$uWGwCMkOe2Q4TAcs31AlFQ$qItPYh1b8DuOKDdJTa6D4U4g5FB40HAds1M6FcgkAiY',
-      email: 'konradweiss@gmx.de',
-    },
-  ];
+  @InjectRepository(UserEntity)
+  private readonly repository: Repository<UserEntity>;
 
-  public getUsers(): Omit<User, 'hash'>[] {
-    return this.users.map((user) => {
-      const { hash, ...userData } = user;
-
-      return userData;
-    });
+  public getUsers(): Promise<User[]> {
+    return this.repository.find();
   }
 
   public async findUserByEmail(email: string): Promise<User | undefined> {
-    return this.users.find((user) => user.email === email);
+    const user = await this.repository.findOneBy({ email });
+
+    if (!user) {
+      throw new NotFoundException([`User with email ${email} not found`]);
+    }
+
+    return user;
   }
 
   public async findUserById(id: string): Promise<User | undefined> {
-    return this.users.find((user) => user.id === id);
+    const user = await this.repository.findOneBy({ id });
+
+    if (!user) {
+      throw new NotFoundException([`User with id ${id} not found`]);
+    }
+
+    return user;
+  }
+
+  public async createUser(data: User): Promise<User> {
+    const existingUser = await this.repository.findOneBy({ email: data.email });
+    if (existingUser) {
+      throw new ForbiddenException(['Email already exists']);
+    }
+
+    const user = this.repository.create(data);
+    await this.repository.save(user);
+
+    return user;
+  }
+
+  public async updateUserById(id: string, data: Partial<User>): Promise<User> {
+    const user = await this.findUserById(id);
+
+    if (!user) {
+      throw new NotFoundException([`User with id ${id} not found`]);
+    }
+
+    await this.repository.update(id, data);
+
+    return this.findUserById(id);
+  }
+
+  public async deleteUserById(id: string): Promise<DeleteResult> {
+    const result = await this.repository.delete(id);
+
+    if (!result.affected) {
+      throw new NotFoundException([`User with id ${id} not found`]);
+    }
+
+    return result;
   }
 }

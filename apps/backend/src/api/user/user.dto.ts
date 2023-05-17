@@ -1,6 +1,12 @@
 import { User } from '@happy-coding-challenge/types';
 import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
-import { IsDateString, IsEmail, IsOptional, IsString } from 'class-validator';
+import {
+  IsDateString,
+  IsEmail,
+  IsOptional,
+  IsString,
+  Length,
+} from 'class-validator';
 
 export class UserDto implements User {
   @ApiProperty({ readOnly: true, format: 'uuid' })
@@ -11,10 +17,12 @@ export class UserDto implements User {
   public email!: string;
 
   @IsString()
+  @Length(0, 50)
   @ApiProperty({ example: 'Firstname' })
   public firstname!: string;
 
   @IsString()
+  @Length(0, 50)
   @ApiProperty({ example: 'Lastname' })
   public lastname!: string;
 
