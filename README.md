@@ -25,5 +25,8 @@ ACCESS_SECRET='secret'
 
 To run both, frontend and backend simultaneously, run `npm run dev`
 This will start the frontend on http://localhost:4200 and the backend on http://localhost:3000/api (Swagger documentation is included here)
+Login with user data:
+email: firstname@lastname.com
+password: password
 
 ## Further help
