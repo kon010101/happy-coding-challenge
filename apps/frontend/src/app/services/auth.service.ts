@@ -34,7 +34,7 @@ export class AuthenticationService {
         map((user) => {
           localStorage.setItem('user', JSON.stringify(user));
           this.userSubject.next(user);
-          this.router.navigate(['']);
+          this.router.navigate(['/admin']);
 
           return user;
         })

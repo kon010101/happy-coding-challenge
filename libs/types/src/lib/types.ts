@@ -4,7 +4,7 @@ export interface User {
   password?: string;
   firstname: string;
   lastname: string;
-  dateOfBirth: Date;
+  dateOfBirth?: Date;
 }
 
 export interface LoginResult {

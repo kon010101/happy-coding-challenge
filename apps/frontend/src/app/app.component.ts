@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from './services/auth.service';
 
 @Component({
   selector: 'happy-coding-challenge-root',
@@ -7,4 +9,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'frontend';
+
+  constructor(
+    private _authenticationService: AuthenticationService,
+    public router: Router
+  ) {}
+
+  logout() {
+    this._authenticationService.logout();
+  }
 }

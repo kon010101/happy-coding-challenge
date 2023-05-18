@@ -1,0 +1,90 @@
+<mat-drawer-container class="drawer-container" [hasBackdrop]="true">
+  <mat-drawer class="drawer" #drawer mode="over">
+    <mat-nav-list>
+      <div class="drawer__menu">
+        <span class="drawer__title">Menu</span>
+        <button
+          mat-icon-button
+          aria-label="Close drawer"
+          (click)="drawer.close()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <mat-list-item
+        class="sidebar-item"
+        routerLink="./users"
+        routerLinkActive="active"
+      >
+        <div class="sidebar-item__content" (click)="drawer.close()">
+          <mat-icon mat-list-icon>people</mat-icon>
+          <span>User Table</span>
+        </div>
+      </mat-list-item>
+
+      <mat-list-item
+        class="sidebar-item"
+        routerLink="./about"
+        routerLinkActive="active"
+      >
+        <div class="sidebar-item__content" (click)="drawer.close()">
+          <mat-icon mat-list-icon>info</mat-icon>
+          <span>About</span>
+        </div>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content class="drawer__content">
+    <mat-toolbar class="toolbar" color="primary">
+      <button
+        mat-icon-button
+        class="drawer__toggle-button"
+        aria-label="Toggle Drawer"
+        (click)="drawer.toggle()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>HCC App</span>
+      <span class="example-spacer"></span>
+      <button
+        mat-icon-button
+        class="example-icon"
+        aria-label="Logout button"
+        (click)="logout()"
+      >
+        <mat-icon>logout</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-sidenav-container class="sidebar">
+      <mat-sidenav #sidenav mode="side" opened="true">
+        <mat-nav-list>
+          <mat-list-item
+            class="sidebar-item"
+            routerLink="./users"
+            routerLinkActive="active"
+          >
+            <div class="sidebar-item__content">
+              <mat-icon mat-list-icon>people</mat-icon>
+              <span>User Table</span>
+            </div>
+          </mat-list-item>
+
+          <mat-list-item
+            class="sidebar-item"
+            routerLink="./about"
+            routerLinkActive="active"
+          >
+            <div class="sidebar-item__content">
+              <mat-icon mat-list-icon>info</mat-icon>
+              <span>About</span>
+            </div>
+          </mat-list-item>
+        </mat-nav-list>
+      </mat-sidenav>
+    </mat-sidenav-container>
+
+    <div class="dashboard__content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

@@ -9,45 +9,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatTableModule } from '@angular/material/table';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MainPageComponent } from './components/main-page/main-page.component';
-import { DialogComponent } from './components/dialog/dialog.component';
-import { UserTableComponent } from './components/user-table/user-table.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    PageNotFoundComponent,
-    MainPageComponent,
-    DialogComponent,
-    UserTableComponent,
-  ],
+  declarations: [AppComponent, LoginComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
-    MatDialogModule,
     MatButtonModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatSidenavModule,
     HttpClientModule,
-    MatTableModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
     BrowserAnimationsModule,

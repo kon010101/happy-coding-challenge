@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '@happy-coding-challenge/types';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
-import { UsersService } from '../../services/users.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { UsersService } from '../../../../services/users.service';
 
 @Component({
   selector: 'happy-coding-challenge-user-table',

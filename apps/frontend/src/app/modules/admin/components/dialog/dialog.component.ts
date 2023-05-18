@@ -1,8 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from '@happy-coding-challenge/types';
-import { UsersService } from '../../services/users.service';
+import { UsersService } from '../../../../services/users.service';
 
 @Component({
   selector: 'happy-coding-challenge-dialog',
@@ -19,11 +24,20 @@ export class DialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public userData: User
   ) {
     this.dialogForm = this._formBuilder.group({
-      firstname: '',
-      lastname: '',
-      email: '',
-      dateOfBirth: '',
-      password: '',
+      firstname: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(50),
+      ]),
+      lastname: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(50),
+      ]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+      ]),
+      dateOfBirth: new FormControl(null),
     });
   }
 
@@ -31,7 +45,7 @@ export class DialogComponent implements OnInit {
     this.dialogForm.patchValue(this.userData);
   }
 
-  onFormSubmit() {
+  public onFormSubmit() {
     if (this.userData) {
       this._usersService
         .updateUser(this.userData.id, this.dialogForm.value)
@@ -58,5 +72,9 @@ export class DialogComponent implements OnInit {
         });
       }
     }
+  }
+
+  public throwFormError(controlName: string, errorName: string) {
+    return this.dialogForm.controls[controlName].hasError(errorName);
   }
 }

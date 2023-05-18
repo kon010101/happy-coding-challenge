@@ -1,0 +1,82 @@
+.drawer {
+  width: 80%;
+  padding: 1rem;
+
+  &__title {
+    font-size: 1.5rem;
+  }
+
+  &__toggle-button {
+    @media screen and (min-width: 768px) {
+      display: none;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid gray;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: max-content auto;
+    grid-template-areas:
+      'toolbar toolbar'
+      'content content';
+    width: 100%;
+
+    @media screen and (min-width: 768px) {
+      grid-template-areas:
+        'toolbar toolbar'
+        'sidebar content';
+    }
+  }
+}
+
+.dashboard__content {
+  padding: 2rem;
+  grid-area: content;
+  overflow: scroll;
+
+  h1 {
+    margin-bottom: 2rem;
+  }
+}
+
+.sidebar {
+  display: none;
+  grid-area: sidebar;
+
+  @media screen and (min-width: 768px) {
+    display: block;
+  }
+}
+
+.sidebar-item {
+  color: white;
+  font-size: 1.25rem;
+
+  &__content {
+    width: 200px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+.drawer-container {
+  display: flex;
+  height: 100vh;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.toolbar {
+  grid-area: toolbar;
+}
