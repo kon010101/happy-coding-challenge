@@ -4,6 +4,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { UsersService } from '../../../../services/users.service';
+import { CoreService } from '../../../../core/core.service';
 
 @Component({
   selector: 'happy-coding-challenge-user-table',
@@ -13,7 +14,8 @@ import { UsersService } from '../../../../services/users.service';
 export class UserTableComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
-    private _usersService: UsersService
+    private _usersService: UsersService,
+    private _coreService: CoreService
   ) {}
 
   ngOnInit(): void {
@@ -40,8 +42,8 @@ export class UserTableComponent implements OnInit {
 
   deleteUser(id: string) {
     this._usersService.deleteUser(id).subscribe({
-      next: (res) => {
-        alert('User deleted');
+      next: () => {
+        this._coreService.openSnackBar('User deleted');
         this.getUsers();
       },
     });

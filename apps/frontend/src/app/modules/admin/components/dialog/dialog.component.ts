@@ -8,6 +8,7 @@ import {
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { User } from '@happy-coding-challenge/types';
 import { UsersService } from '../../../../services/users.service';
+import { CoreService } from '../../../../core/core.service';
 
 @Component({
   selector: 'happy-coding-challenge-dialog',
@@ -21,6 +22,7 @@ export class DialogComponent implements OnInit {
     private _formBuilder: FormBuilder,
     private _usersService: UsersService,
     private _dialogRef: MatDialogRef<DialogComponent>,
+    private _coreService: CoreService,
     @Inject(MAT_DIALOG_DATA) public userData: User
   ) {
     this.dialogForm = this._formBuilder.group({
@@ -50,9 +52,8 @@ export class DialogComponent implements OnInit {
       this._usersService
         .updateUser(this.userData.id, this.dialogForm.value)
         .subscribe({
-          next: (val: Partial<User>) => {
-            console.log({ val });
-            alert('Updated');
+          next: () => {
+            this._coreService.openSnackBar('User updated');
             this._dialogRef.close(true);
           },
           error: (err: Partial<User>) => {
@@ -62,8 +63,8 @@ export class DialogComponent implements OnInit {
     } else {
       if (this.dialogForm.valid) {
         this._usersService.createUser(this.dialogForm.value).subscribe({
-          next: (val: Partial<User>) => {
-            alert('User added');
+          next: () => {
+            this._coreService.openSnackBar('User added');
             this._dialogRef.close(true);
           },
           error: (err: Partial<User>) => {
