@@ -15,10 +15,10 @@ async function bootstrap() {
   app.setGlobalPrefix(globalPrefix);
   const port = process.env.PORT || 3000;
 
-  // app.enableCors({
-  //   credentials: true,
-  //   origin: [env.APP_URL, env.API_URL].filter(Boolean),
-  // });
+  app.enableCors({
+    credentials: true,
+    origin: [process.env.APP_URL, process.env.API_URL].filter(Boolean),
+  });
 
   app.useGlobalPipes(new ValidationPipe());
 

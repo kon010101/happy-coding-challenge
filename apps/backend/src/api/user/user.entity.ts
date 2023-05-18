@@ -19,7 +19,7 @@ export class UserEntity implements User {
 
   @Exclude()
   @Column()
-  public hash: string;
+  public password: string;
 
   @Column({ nullable: true, type: 'date' })
   public dateOfBirth: Date;
@@ -27,8 +27,8 @@ export class UserEntity implements User {
   @BeforeInsert()
   async setHash(password: string) {
     try {
-      const hash = await argon.hash(password || this.hash);
-      this.hash = hash;
+      const hash = await argon.hash(password || this.password);
+      this.password = hash;
     } catch (err) {
       throw new Error(err);
     }

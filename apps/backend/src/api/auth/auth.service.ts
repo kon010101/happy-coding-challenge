@@ -24,7 +24,7 @@ export class AuthService {
       throw new NotFoundException([`User with email ${email} not found`]);
     }
 
-    const verified = await argon.verify(user.hash, pass);
+    const verified = await argon.verify(user.password, pass);
     if (!verified) {
       throw new UnauthorizedException();
     }
@@ -35,9 +35,5 @@ export class AuthService {
       user,
       access_token: await this.jwtService.signAsync(payload),
     };
-  }
-
-  async logout(email: string, pass: string): Promise<any> {
-    // todo
   }
 }

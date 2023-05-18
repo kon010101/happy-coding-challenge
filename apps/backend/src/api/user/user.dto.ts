@@ -28,7 +28,7 @@ export class UserDto implements User {
 
   @IsString()
   @ApiProperty({ example: 'password' })
-  public hash!: string;
+  public password!: string;
 
   @IsDateString()
   @IsOptional()
