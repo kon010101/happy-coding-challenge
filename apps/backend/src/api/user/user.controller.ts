@@ -25,6 +25,7 @@ import { UpdateUserDto, UserDto } from './user.dto';
 import { UserService } from './user.service';
 
 @ApiTags('users')
+@UseGuards(AuthGuard)
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -42,8 +43,6 @@ export class UserController {
   public async createUser(@Body() body: UserDto): Promise<Omit<User, 'hash'>> {
     return this.userService.createUser(body);
   }
-
-  @UseGuards(AuthGuard)
   @Get(':id')
   @ApiOperation({ summary: 'Get a user by id' })
   @ApiOkResponse({ type: UserDto })
