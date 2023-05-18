@@ -1,23 +1,34 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from '@happy-coding-challenge/types';
 import { environment } from '../../environments/environment.development';
+import { Observable } from 'rxjs';
 
+const headers = new HttpHeaders().set('content-type', 'application/json');
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
   constructor(private _http: HttpClient) {}
 
-  getUsers() {
+  getUsers(): Observable<any> {
     return this._http.get(`${environment.apiUrl}/users`);
   }
 
-  createUser(data: User) {
-    return this._http.post(`${environment.apiUrl}/user`, data);
+  getUser(id: string): Observable<any> {
+    return this._http.get(`${environment.apiUrl}/users/${id}`);
   }
 
-  deleteUser(id: string) {}
+  createUser(data: Omit<User, 'id'>) {
+    console.log({ data });
+    return this._http.post(`${environment.apiUrl}/users`, data, { headers });
+  }
 
-  updateUser(id: string, data: Partial<User>) {}
+  deleteUser(id: string) {
+    return this._http.delete(`${environment.apiUrl}/users/${id}`);
+  }
+
+  updateUser(id: string, data: Partial<User>) {
+    return this._http.patch(`${environment.apiUrl}/users/${id}`, data);
+  }
 }
