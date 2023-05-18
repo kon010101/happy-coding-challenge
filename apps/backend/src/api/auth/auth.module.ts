@@ -13,7 +13,7 @@ import { GlobalInterceptor } from './global.interceptor';
     JwtModule.register({
       global: true,
       secret: process.env.ACCESS_SECRET,
-      signOptions: { expiresIn: '60s' },
+      signOptions: { expiresIn: '2h' },
     }),
   ],
   controllers: [AuthController],
