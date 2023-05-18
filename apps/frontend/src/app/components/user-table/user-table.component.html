@@ -1,9 +1,4 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <ng-container matColumnDef="id">
-    <th mat-header-cell *matHeaderCellDef>ID</th>
-    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-  </ng-container>
-
+<table mat-table [dataSource]="dataSource" class="user-table mat-elevation-z8">
   <ng-container matColumnDef="firstname">
     <th mat-header-cell *matHeaderCellDef>First Name</th>
     <td mat-cell *matCellDef="let element">{{ element.firstname }}</td>
@@ -21,7 +16,7 @@
 
   <ng-container matColumnDef="dateOfBirth">
     <th mat-header-cell *matHeaderCellDef>Date of birth</th>
-    <td mat-cell *matCellDef="let element">{{ element.dateOfBirth }}</td>
+    <td mat-cell *matCellDef="let element">{{ element.dateOfBirth | date }}</td>
   </ng-container>
 
   <ng-container matColumnDef="action">
@@ -29,7 +24,7 @@
       <span>Action</span>
       <button
         class="add-button"
-        (click)="openDialog()"
+        (click)="openAddDialog()"
         mat-icon-button
         aria-label="Example icon button with a home icon"
         color="primary"
@@ -38,10 +33,10 @@
       </button>
     </th>
     <td mat-cell *matCellDef="let row">
-      <button mat-icon-button color="primary">
+      <button (click)="openEditDialog(row)" mat-icon-button color="primary">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button color="warn">
+      <button mat-icon-button color="warn" (click)="deleteUser(row.id)">
         <mat-icon>delete</mat-icon>
       </button>
     </td>
