@@ -19,16 +19,16 @@ export class UsersService {
     return this._http.get(`${environment.apiUrl}/users/${id}`);
   }
 
-  createUser(data: Omit<User, 'id'>) {
+  createUser(data: Omit<User, 'id'>): Observable<any> {
     console.log({ data });
     return this._http.post(`${environment.apiUrl}/users`, data, { headers });
   }
 
-  deleteUser(id: string) {
+  deleteUser(id: string): Observable<any> {
     return this._http.delete(`${environment.apiUrl}/users/${id}`);
   }
 
-  updateUser(id: string, data: Partial<User>) {
+  updateUser(id: string, data: Partial<User>): Observable<any> {
     return this._http.patch(`${environment.apiUrl}/users/${id}`, data);
   }
 }

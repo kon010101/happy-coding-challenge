@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 
 import { environment } from '../../environments/environment.development';
 import { AuthenticationService } from '../services/auth.service';
-import { LoginResult } from '../../../../../libs/types/src';
+import { LoginResult } from '@happy-coding-challenge/types';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {

@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment.development';
-import { LoginResult } from '@happy-coding-challenge/types';
+import { LoginResult, User } from '@happy-coding-challenge/types';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -26,10 +26,13 @@ export class AuthenticationService {
 
   login({ email, password }: { email: string; password: string }) {
     return this.http
-      .post<any>(`${environment.apiUrl}/auth/login`, {
-        email,
-        password,
-      })
+      .post<{ user: User; access_token: string }>(
+        `${environment.apiUrl}/auth/login`,
+        {
+          email,
+          password,
+        }
+      )
       .pipe(
         map((user) => {
           localStorage.setItem('user', JSON.stringify(user));
