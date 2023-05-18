@@ -7,6 +7,7 @@ import { User } from '@happy-coding-challenge/types';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';
 import { UserEntity } from './user.entity';
+import * as argon from 'argon2';
 
 @Injectable()
 export class UserService {
@@ -50,13 +51,19 @@ export class UserService {
   }
 
   public async updateUserById(id: string, data: Partial<User>): Promise<User> {
+    const { password, ...userData } = data;
     const user = await this.findUserById(id);
 
     if (!user) {
       throw new NotFoundException([`User with id ${id} not found`]);
     }
 
-    await this.repository.update(id, data);
+    let hash: string = null;
+    if (password) {
+      hash = await argon.hash(password);
+    }
+
+    await this.repository.update(id, { password: hash, ...userData });
 
     return this.findUserById(id);
   }
