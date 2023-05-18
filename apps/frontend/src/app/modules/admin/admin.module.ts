@@ -17,9 +17,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { UserTableComponent } from './components/user-table/user-table.component';
+import { AboutComponent } from './components/about/about.component';
 
 @NgModule({
-  declarations: [DashboardComponent, DialogComponent, UserTableComponent],
+  declarations: [
+    DashboardComponent,
+    DialogComponent,
+    UserTableComponent,
+    AboutComponent,
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
