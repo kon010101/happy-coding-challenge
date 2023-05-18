@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../dialog/dialog.component';
+import { AuthenticationService } from '../../services/auth.service';
 
 @Component({
   selector: 'happy-coding-challenge-main-page',
@@ -8,9 +7,9 @@ import { DialogComponent } from '../dialog/dialog.component';
   styleUrls: ['./main-page.component.scss'],
 })
 export class MainPageComponent {
-  constructor(private _dialog: MatDialog) {}
+  constructor(private _authenticationService: AuthenticationService) {}
 
-  openDialog() {
-    this._dialog.open(DialogComponent);
+  logout() {
+    this._authenticationService.logout();
   }
 }
