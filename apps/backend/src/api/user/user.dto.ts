@@ -27,6 +27,7 @@ export class UserDto implements User {
   public lastname!: string;
 
   @IsString()
+  @Length(5, 100)
   @ApiProperty({ example: 'password' })
   public password!: string;
 

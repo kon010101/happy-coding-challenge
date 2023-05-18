@@ -22,7 +22,7 @@ export class UserEntity implements User {
   public password: string;
 
   @Column({ nullable: true, type: 'date' })
-  public dateOfBirth: Date;
+  public dateOfBirth?: Date;
 
   @BeforeInsert()
   async setHash(password: string) {
