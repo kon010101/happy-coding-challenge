@@ -8,8 +8,6 @@ import { AuthenticationService } from './services/auth.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'frontend';
-
   constructor(
     private _authenticationService: AuthenticationService,
     public router: Router

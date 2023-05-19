@@ -21,6 +21,7 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
   declarations: [AppComponent, LoginComponent, PageNotFoundComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
@@ -29,7 +30,6 @@ import { ErrorInterceptor } from './helpers/error.interceptor';
     HttpClientModule,
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
-    BrowserAnimationsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

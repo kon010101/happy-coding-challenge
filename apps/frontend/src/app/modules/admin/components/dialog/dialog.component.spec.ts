@@ -1,5 +1,8 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AdminModule } from '../../admin.module';
 import { DialogComponent } from './dialog.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('DialogComponent', () => {
   let component: DialogComponent;
@@ -7,6 +10,7 @@ describe('DialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [AdminModule, HttpClientModule, BrowserAnimationsModule],
       declarations: [DialogComponent],
     }).compileComponents();
 

@@ -1,5 +1,9 @@
+import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AdminModule } from '../../admin.module';
 import { DashboardComponent } from './dashboard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -7,6 +11,12 @@ describe('DashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [
+        HttpClientModule,
+        AdminModule,
+        RouterTestingModule,
+        BrowserAnimationsModule,
+      ],
       declarations: [DashboardComponent],
     }).compileComponents();
 
@@ -18,4 +28,6 @@ describe('DashboardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('should render appbar', () => {});
 });
