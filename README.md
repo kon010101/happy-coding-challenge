@@ -29,4 +29,10 @@ Login with user data:
 email: firstname@lastname.com
 password: password
 
-## Further help
+## Testing
+- just added some basic tests
+- use `npm run test` script to start tests
+
+## Additional Info
+- token authorization: no refresh token used, increased expiry of access token for simplicity reasons
+- open api documentation can be used to test the api
